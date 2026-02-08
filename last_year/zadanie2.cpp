@@ -1,8 +1,7 @@
-#define _CRT_SECURE_NO_WARNINGS
-
 #include <iostream>
 #include <cstdio>
 #include <cstring>
+#include <algorithm>
 
 using namespace std;
 
@@ -51,10 +50,32 @@ Date* date_from_string(char s_date[]) {
 
 }
 
+bool sort_date(Date* date1, Date* date2) {
+    if (date1->year != date2->year) {
+        return date1->year > date2->year;
+    }
+    else {
+        if (date1->month != date2->month) {
+            return date1->month > date2->month;
+        }
+        else {
+            if (date1->day != date2->day) {
+                return date1->day > date2->day;
+            }
+        }
+    }
+}
+
 int main()
 {
-    const char* str = "8.12.2025";
     Date* date[3];
+    // 02.08.2004
+    // 04.05.2006
+    // 03.07.2003
+
+    // 04.05.2006
+    // 02.08.2004
+    // 03.07.2003
 
     date[0] = new Date;
     date[1] = new Date;
@@ -71,7 +92,9 @@ int main()
     date[1] = date_from_string(date2);
     date[2] = date_from_string(date3);
 
-    cout << date[2]->month;
+    sort(date, date + 3, sort_date);
+
+    cout << date[1]->year;
     return 0;
 
 }
